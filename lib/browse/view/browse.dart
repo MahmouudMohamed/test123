@@ -11,12 +11,27 @@ class Browse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // List <String> images = [
-    //   'assets/images/2.png',
-    //   'assets/images/action.png',
-    //   'assets/images/2.png',
-    //   'assets/images/action.png',
-    // ];
+    List <String> images = [
+      'assets/images/action.jpg',
+      'assets/images/adventure.jpg',
+      'assets/images/anime.jpg',
+      'assets/images/comedy.jpg',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+      'assets/images/action.png',
+    ];
     return BlocProvider(
       create: (context) => CategoryCubit()..getGenreMovies(),
       child: BlocBuilder<CategoryCubit, CategoryState>(
@@ -64,18 +79,22 @@ class Browse extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 2,
+                      mainAxisSpacing: 15,
                       mainAxisExtent: 120),
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, BrowseDetails.routeName,
-                            arguments: category.genresModel?.genres?[index].id);
+                            arguments: category.genresModel?.genres?[index].id,);
                       },
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
                           Image.asset(
-                            "assets/images/action.png"
+                            images[index],
+                            fit: BoxFit.cover,
+                            width: 180,
+                            height: 110,
                           ),
                           Text(
                             category.genresModel?.genres?[index].name ?? '',

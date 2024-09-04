@@ -11,11 +11,11 @@ class CustomRate extends StatelessWidget {
         Icon(
           Icons.star,
           color: Colors.yellow,
-          size: 20,
+          size: 23,
         ),
         Text(
           vote,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white,fontSize: 18),
         ),
       ],
     );

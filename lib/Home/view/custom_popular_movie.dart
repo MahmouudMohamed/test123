@@ -4,7 +4,8 @@ import 'package:test123/Home/home_categories/film_details.dart';
 
 import 'package:test123/Shared%20Widget/book_mark.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
-import 'package:test123/search/movie_det.dart';
+import 'package:test123/const.dart';
+import 'package:test123/Home/view/movie_det.dart';
 
 import '../model/PopularMoviesModel.dart';
 
@@ -12,10 +13,6 @@ class CustomPopularMovie extends StatelessWidget {
   Results? popularIndex;
 
   CustomPopularMovie({required this.popularIndex}); // Results results;
-
-  // CustomPopularMovie({required this.results, super.key});
-
-  // bool checkMark = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +22,7 @@ class CustomPopularMovie extends StatelessWidget {
         children: [
           CachedNetworkImage(
             imageUrl:
-                "https://image.tmdb.org/t/p/w500${popularIndex?.backdropPath ?? ""}",
+                "https://image.tmdb.org/t/p/w500${popularIndex?.backdropPath ?? Const.wrongImageBack}",
             fit: BoxFit.cover,
             placeholder: (context, text) => CircularProgressIndicator(
               color: Colors.yellow,
@@ -50,7 +47,7 @@ class CustomPopularMovie extends StatelessWidget {
                         children: [
                           CachedNetworkImage(
                             imageUrl:
-                                "https://image.tmdb.org/t/p/w500${popularIndex?.posterPath ?? ""}",
+                                "https://image.tmdb.org/t/p/w500${popularIndex?.posterPath ??Const.wrongImagePoster}",
                             height: 220,
                             placeholder: (context, text) => Center(
                                 child: CircularProgressIndicator(
@@ -88,7 +85,7 @@ class CustomPopularMovie extends StatelessWidget {
                             "${popularIndex?.releaseDate ?? ""}",
                             style: TextStyle(color: Colors.white),
                           ),
-                         CustomRate(vote: "${popularIndex?.voteAverage ?? ""}")
+                         CustomRate(vote: "${popularIndex?.voteAverage ?? ""}".substring(0,3))
                         ],
                       )
                     ],

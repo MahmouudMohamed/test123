@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:test123/search/custom_search_tab.dart';
+import 'package:test123/search/view/custom_search_tab.dart';
 
 import '../Home/view_model/home_cuibt.dart';
 import '../Home/view_model/home_state.dart';
@@ -29,6 +29,7 @@ class Search extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                       ),
+                      cursorColor: Colors.white.withOpacity(0.67),
                       onChanged: (query) {
                         cubit.getSearchMovie(query);
                         if (query == '') {

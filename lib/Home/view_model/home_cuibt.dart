@@ -30,8 +30,6 @@ class HomeCubit extends Cubit<HomeState> {
   SearchModel?searchModel;
   GenresModel?genresModel;
 
-
-
   static const String host = "api.themoviedb.org";
 
   getPopular() async {

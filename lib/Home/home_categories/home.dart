@@ -7,7 +7,7 @@ import 'new_releases_widget.dart';
 class Home extends StatelessWidget {
   static const String routeName = "home1";
 
-  Home({super.key});
+   Home({super.key});
 
   @override
   Widget build(BuildContext context) {

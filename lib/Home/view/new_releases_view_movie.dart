@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
-import 'package:test123/search/movie_det.dart';
+import 'package:test123/Home/view/movie_det.dart';
 
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
@@ -55,7 +55,7 @@ class NewReleasesViewMovie extends StatelessWidget {
                           child: Stack(
                             children: [
                             CachedNetworkImage(
-                            imageUrl: "https://image.tmdb.org/t/p/w500${view.newReleaseModel!.results![index].posterPath!}",
+                            imageUrl: "https://image.tmdb.org/t/p/w500${view.newReleaseModel?.results?[index].posterPath??""}",
                             fit: BoxFit.fill,
                             height: MediaQuery.sizeOf(context).height * 0.25,
                             width:140 ,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../view/new_releases_view_movie.dart';
-import '../view/row_category.dart';
+import '../../Shared Widget/row_category.dart';
 
 class NewReleasesWidget extends StatelessWidget {
   const NewReleasesWidget({super.key});

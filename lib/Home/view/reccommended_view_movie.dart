@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
-import 'package:test123/search/movie_det.dart';
+import 'package:test123/Home/view/movie_det.dart';
 
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
@@ -38,58 +38,66 @@ class RecommendedViewMovie extends StatelessWidget {
           }
 
           if (state is RecommendedSuccessState) {
-            return SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.34,
+            return SizedBox
+              (
+              height: MediaQuery.sizeOf(context).height * 0.36,
               child: ListView.separated(
                 separatorBuilder: (context, index) => const SizedBox(
                   width: 15,
                 ),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, FilmDetails.routeName,
-                              arguments:
-                                  cubit.recommendedModel!.results![index].id);
-                        },
-                        child: Stack(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl:
-                                  "https://image.tmdb.org/t/p/w500${cubit.recommendedModel!.results![index].posterPath!}",
-                              fit: BoxFit.fill,
-                              height: MediaQuery.sizeOf(context).height * 0.24,
-                              width: 140,
-                              placeholder: (context, text) => const Center(
-                                  child: CircularProgressIndicator(
-                                color: Colors.yellow,
-                              )),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                            const BookMark()
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.38,
-                        child: Center(
-                          child: Text(
-                            textAlign: TextAlign.center,
-                            cubit.recommendedModel?.results![index].originalTitle??"",
-                            style: const TextStyle(color: Colors.white),
+                  return
+                    Card(
+                    color: Colors.grey,
+                    clipBehavior: Clip.antiAlias,
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, FilmDetails.routeName,
+                                arguments:
+                                    cubit.recommendedModel!.results![index].id);
+                          },
+                          child: Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl:
+                                    "https://image.tmdb.org/t/p/w500${cubit.recommendedModel!.results![index].posterPath!}",
+                                fit: BoxFit.fill,
+                                height: MediaQuery.sizeOf(context).height * 0.26,
+                                width: MediaQuery.sizeOf(context).height * 0.19,
+                                placeholder: (context, text) => const Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.yellow,
+                                )),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                              const BookMark()
+                            ],
                           ),
                         ),
-                      ),
-                      Text(
-                        cubit.recommendedModel!.results![index].releaseDate!
-                            .substring(0, 10),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      CustomRate(vote: "${cubit.recommendedModel!.results![index].voteAverage}")
-                    ],
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.38,
+                          child: Text(
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            cubit.recommendedModel?.results![index].originalTitle??"",
+                            style: const TextStyle(color: Colors.white,fontSize: 15),
+                          ),
+                        ),
+                        Center(
+                          child: Text(
+                            cubit.recommendedModel!.results![index].releaseDate!
+                                .substring(0, 10),
+                            style: const TextStyle(color: Colors.white,fontSize: 14),
+                          ),
+                        ),
+                        CustomRate(vote: "${cubit.recommendedModel!.results![index].voteAverage}".substring(0,3))
+                      ],
+                    ),
                   );
                 },
                 itemCount: cubit.recommendedModel!.results!.length,

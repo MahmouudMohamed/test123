@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../view/reccommended_view_movie.dart';
-import '../view/row_category.dart';
+import '../../Shared Widget/row_category.dart';
 
 class RecommendedWidget extends StatelessWidget {
   const RecommendedWidget({super.key});

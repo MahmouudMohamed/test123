@@ -1,8 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/browse/view_model/category_cubit.dart';
-import 'package:test123/search/movie_det.dart';
+import 'package:test123/Home/view/movie_det.dart';
+
+import '../../Shared Widget/book_mark.dart';
+import '../../Shared Widget/custom_rate.dart';
 
 class BrowseDetails extends StatelessWidget {
   BrowseDetails({super.key});
@@ -35,26 +39,85 @@ class BrowseDetails extends StatelessWidget {
           }
           if (state is BrowseShowSuccessState) {
             return Scaffold(
-                body: GridView.builder(
-              itemCount: view.categoryModel?.results?.length ?? 0,
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 1,
-                mainAxisSpacing: 5,
+             appBar: AppBar(),
+                body: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 15,),
+                      GridView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: view.categoryModel?.results?.length ?? 0,
+                                    shrinkWrap: true,
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 20,childAspectRatio: 60/100
 
-              ),
-              itemBuilder: (context, index) => InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, FilmDetails.routeName,
-                      arguments: view.categoryModel?.results?[index].id);
-                },
-                child: Text(
-                  view.categoryModel?.results?[index].title ?? '',
-                  style: const TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-            ));
+                                    ),
+                                    itemBuilder: (context, index) => InkWell(
+                      child: Card(
+                        color: Colors.grey,
+                        clipBehavior: Clip.antiAlias,
+                        child: Column(
+
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, FilmDetails.routeName,
+                                    arguments:
+                                    view.categoryModel!.results![index].id);
+                              },
+                              child: Stack(
+                                children: [
+
+                                  CachedNetworkImage(
+                                    imageUrl:
+                                    "https://image.tmdb.org/t/p/w500${view.categoryModel!.results![index].posterPath!}",
+                                    fit: BoxFit.fill,
+                                    height: MediaQuery.sizeOf(context).height * 0.30,
+                                    width: MediaQuery.sizeOf(context).height * 0.25,
+                                    placeholder: (context, text) => const Center(
+                                        child: CircularProgressIndicator(
+                                          color: Colors.yellow,
+                                        )),
+                                    errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                  ),
+                                  const BookMark()
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.38,
+                              child: Text(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                view.categoryModel?.results![index].originalTitle??"",
+                                style: const TextStyle(color: Colors.white,fontSize: 15),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                view.categoryModel!.results![index].releaseDate!
+                                    .substring(0, 10),
+                                style: const TextStyle(color: Colors.white,fontSize: 14),
+                              ),
+                            ),
+                            CustomRate(vote: "${view.categoryModel!.results![index].voteAverage}".substring(0,3))
+                          ],
+                        ),
+                      )
+                      // child: Text(
+                      //   view.categoryModel?.results?[index].title ?? '',
+                      //   style: const TextStyle(color: Colors.white, fontSize: 25),
+                      // ),
+                                    ),
+                                  ),
+                    ],
+                  ),
+                )
+            );
           }
 
           return Container();
