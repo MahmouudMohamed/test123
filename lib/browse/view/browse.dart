@@ -85,7 +85,7 @@ class Browse extends StatelessWidget {
                     return InkWell(
                       onTap: () {
                         Navigator.pushNamed(context, BrowseDetails.routeName,
-                            arguments: category.genresModel?.genres?[index].id,);
+                            arguments: category.genresModel?.genres?[index],);
                       },
                       child: Stack(
                         alignment: Alignment.center,

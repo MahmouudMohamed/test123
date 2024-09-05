@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
+import 'package:test123/browse/view/browse_details.dart';
 
 import '../../Shared Widget/row_category.dart';
 import 'similar_movies.dart';
@@ -123,6 +124,12 @@ class MovieDet extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  // Wrap(
+                                  //   children: cubit.movieDetailsModel?.genres?.map((genre) {
+                                  //     return CategoryChip(text: genre.name ?? '');
+                                  //   }).toList() ?? [],
+                                  // ),
+
                                   GridView.builder(
                                     shrinkWrap: true,
                                     physics: NeverScrollableScrollPhysics(),
@@ -136,14 +143,24 @@ class MovieDet extends StatelessWidget {
                                             ?.length ??
                                         0,
                                     itemBuilder: (context, index) =>
-                                        CategoryChip(
-                                            text: cubit.movieDetailsModel
-                                                    ?.genres?[index].name ??
-                                                ""),
+                                        InkWell(
+                                          onTap: () {
+                                            debugPrint('movie det ${cubit.movieDetailsModel?.genres?[index].id.toString().runtimeType}');
+                                            debugPrint('movie det2 ${cubit.movieDetailsModel?.genres?[index].name.toString()}');
+                                            Navigator.pushNamed(context, BrowseDetails.routeName,
+                                            arguments: cubit.movieDetailsModel?.genres?[index],
+                                            );
+                                          },
+                                          child: CategoryChip(
+                                              text: cubit.movieDetailsModel
+                                                      ?.genres?[index].name ??
+                                                  ""),
+                                        ),
                                   ),
                                   SizedBox(height: 10,),
                                   Center(
                                     child: Text(
+                                      // softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 9,
                                       "${cubit.movieDetailsModel?.overview ?? ""}",

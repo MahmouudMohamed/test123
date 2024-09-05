@@ -15,7 +15,7 @@ import 'bloc_observer.dart';
 import 'browse/view/browse.dart';
 import 'my_theme_data.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: MyThemeData.lightTheme,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
-        Home.routeName: (context) =>  Home(),
+        Home.routeName: (context) => Home(),
         Search.routeName: (context) => Search(),
         Browse.routeName: (context) => Browse(),
         WatchList.routeName: (context) => WatchList(),
