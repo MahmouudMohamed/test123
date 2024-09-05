@@ -84,22 +84,25 @@ class MovieDet extends StatelessWidget {
                              return AlertDialog(
                             backgroundColor: Colors.grey.withOpacity(0.5),
                             content:  SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.5,
+                              height: MediaQuery.sizeOf(context).height * 0.3,
                               width: 150,
                               child: ListView.separated(
                                 shrinkWrap:true,
                                 itemBuilder: (context, index) =>   TextButton(onPressed: ()
                                 {
-                                  print('ssd${cubit.videoModel?.results?[index].key}');
+                                  print('print ${cubit.videoModel?.results?[index].id}');
                                   Uri uri = Uri.parse(
                                       'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key}??" "'
                                   );
                                   launchUrl(uri);
                                   Navigator.pop(context);
                                 }
-                                  , child:  Text('Trailer${index+1}'??'',style: const TextStyle(
-                                      fontSize: 25,color: Colors.red
-                                  ),
+                                  , child:  Center(
+                                    child: Text(cubit.videoModel?.results?[index]==null?'No trailer':'Trailer${index+1}',
+                                      style: const TextStyle(
+                                        fontSize: 25,color: Colors.red
+                                    ),
+                                    ),
                                   ),
                                 ),
                                 separatorBuilder: (context, index) => const SizedBox(height: 10,),
