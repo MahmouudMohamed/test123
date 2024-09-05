@@ -8,14 +8,14 @@ class CustomRate extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Wrap(
       children: [
-        Icon(
+        const Icon(
           Icons.star,
           color: Colors.yellow,
           size: 23,
         ),
         Text(
           vote,
-          style: TextStyle(color: Colors.white,fontSize: 18),
+          style: const TextStyle(color: Colors.white,fontSize: 18),
         ),
       ],
     );

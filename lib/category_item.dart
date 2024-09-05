@@ -19,7 +19,7 @@ class CategoryItem extends StatelessWidget {
           ),
           Text(
             category.title,
-            style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
+            style: const TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),
           )
         ],
       ),

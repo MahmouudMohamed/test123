@@ -24,6 +24,7 @@
 /// video : false
 /// vote_average : 5.3
 /// vote_count : 86
+library;
 
 class MovieDetailsModel {
   MovieDetailsModel({

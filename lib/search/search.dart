@@ -8,7 +8,7 @@ import '../Home/view_model/home_state.dart';
 class Search extends StatelessWidget {
   static const String routeName = "s";
 
-  Search({super.key});
+  const Search({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class Search extends StatelessWidget {
                         ),
                       ),
                     ),
-                    CustomSearchTab()
+                    const CustomSearchTab()
 
                   ]),
                 ),

@@ -5,14 +5,13 @@ import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
 import 'package:test123/const.dart';
-import 'package:test123/Home/view/movie_det.dart';
 
 import '../model/PopularMoviesModel.dart';
 
 class CustomPopularMovie extends StatelessWidget {
   Results? popularIndex;
 
-  CustomPopularMovie({required this.popularIndex}); // Results results;
+  CustomPopularMovie({super.key, required this.popularIndex}); // Results results;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +23,10 @@ class CustomPopularMovie extends StatelessWidget {
             imageUrl:
                 "https://image.tmdb.org/t/p/w500${popularIndex?.backdropPath ?? Const.wrongImageBack}",
             fit: BoxFit.cover,
-            placeholder: (context, text) => CircularProgressIndicator(
+            placeholder: (context, text) => const CircularProgressIndicator(
               color: Colors.yellow,
             ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
           Positioned(
             top: 95,
@@ -49,14 +48,14 @@ class CustomPopularMovie extends StatelessWidget {
                             imageUrl:
                                 "https://image.tmdb.org/t/p/w500${popularIndex?.posterPath ??Const.wrongImagePoster}",
                             height: 220,
-                            placeholder: (context, text) => Center(
+                            placeholder: (context, text) => const Center(
                                 child: CircularProgressIndicator(
                               color: Colors.yellow,
                             )),
                             errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                                const Icon(Icons.error),
                           ),
-                          BookMark()
+                          const BookMark()
                         ],
                       )),
                   SizedBox(
@@ -73,8 +72,8 @@ class CustomPopularMovie extends StatelessWidget {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.5,
                             child: Text(
-                              "${popularIndex?.originalTitle ?? ""}",
-                              style: TextStyle(color: Colors.white),
+                              popularIndex?.originalTitle ?? "",
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         ],
@@ -82,8 +81,8 @@ class CustomPopularMovie extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "${popularIndex?.releaseDate ?? ""}",
-                            style: TextStyle(color: Colors.white),
+                            popularIndex?.releaseDate ?? "",
+                            style: const TextStyle(color: Colors.white),
                           ),
                          CustomRate(vote: "${popularIndex?.voteAverage ?? ""}".substring(0,3))
                         ],

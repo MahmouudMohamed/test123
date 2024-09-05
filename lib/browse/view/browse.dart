@@ -7,7 +7,7 @@ import 'package:test123/browse/view_model/category_cubit.dart';
 class Browse extends StatelessWidget {
   static const String routeName = "b";
 
-  Browse({super.key});
+  const Browse({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +57,10 @@ class Browse extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 18),
                   child: Text(
                     "Browse Category",
@@ -70,13 +70,13 @@ class Browse extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 GridView.builder(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 2,
                       mainAxisSpacing: 15,
@@ -98,7 +98,7 @@ class Browse extends StatelessWidget {
                           ),
                           Text(
                             category.genresModel?.genres?[index].name ?? '',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white),

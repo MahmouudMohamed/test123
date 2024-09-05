@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/browse/view_model/category_cubit.dart';
-import 'package:test123/Home/view/movie_det.dart';
 
 import '../../Shared Widget/book_mark.dart';
 import '../../Shared Widget/custom_rate.dart';
 
 class BrowseDetails extends StatelessWidget {
-  BrowseDetails({super.key});
+  const BrowseDetails({super.key});
 
   static const routeName = "browse_details";
 
@@ -40,7 +39,7 @@ class BrowseDetails extends StatelessWidget {
           if (state is BrowseShowSuccessState) {
             return Scaffold(
              appBar: AppBar(
-               title: Text(arguments.name.toString(),style: TextStyle(color: Colors.white,),),
+               title: Text(arguments.name.toString(),style: const TextStyle(color: Colors.white,),),
 
              ),
                 body: SingleChildScrollView(
@@ -48,9 +47,9 @@ class BrowseDetails extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Column(
                       children: [
-                        SizedBox(height: 15,),
+                        const SizedBox(height: 15,),
                         GridView.builder(
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: view.categoryModel?.results?.length ?? 0,
                                       shrinkWrap: true,
                                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

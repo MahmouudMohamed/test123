@@ -210,10 +210,10 @@ class HomeCubit extends Cubit<HomeState> {
   int index = 0;
 
   List<Widget> page = [
-    Home(),
-    Search(),
-    Browse(),
-    WatchList(),
+    const Home(),
+    const Search(),
+    const Browse(),
+    const WatchList(),
   ];
   changeHomeScreen(value){
     index = value;

@@ -9,7 +9,7 @@ import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
 
 class SimilarMovies extends StatelessWidget {
-   SimilarMovies({super.key});
+   const SimilarMovies({super.key});
   @override
   Widget build(BuildContext context) {
     String path="https://image.tmdb.org/t/p/w500";
@@ -26,12 +26,12 @@ class SimilarMovies extends StatelessWidget {
                 ));
           }
           if (state is SimilarMoviesErrorState) {
-            return Center(
+            return const Center(
               child: Column(
                 children: [
                   Text(
                     "Error Occurred",
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ],
               ),
@@ -76,7 +76,7 @@ class SimilarMovies extends StatelessWidget {
                                 errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                               ),
-                               BookMark(
+                               const BookMark(
 
                               )
                             ],

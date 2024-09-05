@@ -13,7 +13,7 @@ import '../../Shared Widget/category_chip.dart';
 import '../../const.dart';
 
 class MovieDet extends StatelessWidget {
-  MovieDet({super.key});
+  const MovieDet({super.key});
 
   static const String routeName = "de";
 
@@ -24,19 +24,21 @@ class MovieDet extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit()
         ..getMovieDetails(id)
-        ..getSimilarMovieDetails(id)..getVideoMovie(id),
+        ..getSimilarMovieDetails(id)
+        ..getVideoMovie(id)
+      ,
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
-          if (state is MovieDetailsLoadingState || state is SimilarMoviesLoadingState) {
+          if (state is MovieDetailsLoadingState|| state is SimilarMoviesLoadingState||state is VideoMovieLoadingState) {
             return const Center(
               child: CircularProgressIndicator(
                 color: Colors.yellowAccent,
               ),
             );
           }
-          if (state is MovieDetailsErrorState || state is SimilarMoviesErrorState) {
-            return Center(
+          if (state is MovieDetailsErrorState || state is SimilarMoviesErrorState || state is VideoMovieErrorState) {
+            return const Center(
               child: Column(
                 children: [
                   Text(
@@ -47,12 +49,12 @@ class MovieDet extends StatelessWidget {
               ),
             );
           }
-          if (state is MovieDetailsSuccessState || state is SimilarMoviesSuccessState) {
+          if (state is MovieDetailsSuccessState|| state is SimilarMoviesSuccessState || state is VideoMovieSuccessState) {
             return Scaffold(
               appBar: AppBar(
                 title: Text(
                   "${cubit.movieDetailsModel?.title}",
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
               body: SingleChildScrollView(
@@ -78,8 +80,8 @@ class MovieDet extends StatelessWidget {
                               const Icon(Icons.error),
                         ),
                         IconButton(onPressed: (){
-                          showDialog(context: context, builder: (context) =>
-                              AlertDialog(
+                          showDialog(context: context, builder: (context) {
+                             return AlertDialog(
                             backgroundColor: Colors.grey.withOpacity(0.5),
                             content:  SizedBox(
                               height: MediaQuery.sizeOf(context).height * 0.5,
@@ -88,28 +90,29 @@ class MovieDet extends StatelessWidget {
                                 shrinkWrap:true,
                                 itemBuilder: (context, index) =>   TextButton(onPressed: ()
                                 {
+                                  print('ssd${cubit.videoModel?.results?[index].key}');
                                   Uri uri = Uri.parse(
                                       'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key}??" "'
                                   );
                                   launchUrl(uri);
                                   Navigator.pop(context);
                                 }
-                                  , child:  Text('Trailer${index+1}'??'',style: TextStyle(
+                                  , child:  Text('Trailer${index+1}'??'',style: const TextStyle(
                                       fontSize: 25,color: Colors.red
                                   ),
                                   ),
                                 ),
-                                separatorBuilder: (context, index) => SizedBox(height: 10,),
+                                separatorBuilder: (context, index) => const SizedBox(height: 10,),
                                 itemCount: cubit.videoModel?.results?.length??0,
                               ),
                             ),
-                          ));
+                          );});
                           // Uri uri = Uri.parse(
                           //     'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[0].key}??" "'
                           // );
                           // launchUrl(uri);
 
-                        }, icon: Text("Watch movie",style: TextStyle(color: Colors.white),))
+                        }, icon: const Text("Watch movie",style: TextStyle(color: Colors.white),))
                       ],
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
@@ -169,9 +172,9 @@ class MovieDet extends StatelessWidget {
 
                                   GridView.builder(
                                     shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
                                             mainAxisExtent: 30,
                                         crossAxisSpacing: 10,
@@ -192,13 +195,13 @@ class MovieDet extends StatelessWidget {
                                                   ""),
                                         ),
                                   ),
-                                  SizedBox(height: 10,),
+                                  const SizedBox(height: 10,),
                                   Center(
                                     child: Text(
                                       // softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 9,
-                                      "${cubit.movieDetailsModel?.overview ?? ""}",
+                                      cubit.movieDetailsModel?.overview ?? "",
                                       style: const TextStyle(
                                         color: Colors.white,
                                       ),
@@ -217,15 +220,15 @@ class MovieDet extends StatelessWidget {
                           ],
                         ),
                         Container(
-                          padding: EdgeInsets.all(20),
-                          color: Color(0xff282A28),
+                          padding: const EdgeInsets.all(20),
+                          color: const Color(0xff282A28),
                           child: Column(
                             children: [
                               RowCategory(left: "More Like This"),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
-                              SimilarMovies()
+                              const SimilarMovies()
                             ],
                           ),
                         )

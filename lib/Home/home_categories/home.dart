@@ -7,17 +7,17 @@ import 'new_releases_widget.dart';
 class Home extends StatelessWidget {
   static const String routeName = "home1";
 
-   Home({super.key});
+   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
       child: Column(
         children: [
           PopularWidget(),
           NewReleasesWidget(),
           Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
+            padding: EdgeInsets.only(bottom: 20.0),
             child: RecommendedWidget(),
           ),
 

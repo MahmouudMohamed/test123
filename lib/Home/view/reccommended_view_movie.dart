@@ -4,13 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
-import 'package:test123/Home/view/movie_det.dart';
 
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
 
 class RecommendedViewMovie extends StatelessWidget {
-  RecommendedViewMovie({super.key});
+  const RecommendedViewMovie({super.key});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

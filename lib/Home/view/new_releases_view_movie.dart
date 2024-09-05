@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
-import 'package:test123/Home/view/movie_det.dart';
 
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
@@ -31,7 +30,7 @@ class NewReleasesViewMovie extends StatelessWidget {
                   children: [
                     Text(
                       "${state.errorMes}",
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ],
                 ),
@@ -42,7 +41,7 @@ class NewReleasesViewMovie extends StatelessWidget {
               return  SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.26,
                 child: ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(width: 15,),
+                  separatorBuilder: (context, index) => const SizedBox(width: 15,),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return Column(
@@ -60,11 +59,11 @@ class NewReleasesViewMovie extends StatelessWidget {
                             height: MediaQuery.sizeOf(context).height * 0.25,
                             width:140 ,
                             placeholder: (context, text) =>
-                                Center(child: CircularProgressIndicator(color: Colors.yellow,)),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
+                                const Center(child: CircularProgressIndicator(color: Colors.yellow,)),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
 
-                              BookMark()
+                              const BookMark()
 
                             ],
                           ),
@@ -76,7 +75,7 @@ class NewReleasesViewMovie extends StatelessWidget {
                 ),
               );
             }
-            return SizedBox();
+            return const SizedBox();
           }),
     );
 

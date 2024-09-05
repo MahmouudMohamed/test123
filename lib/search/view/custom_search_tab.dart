@@ -7,7 +7,6 @@ import 'package:test123/Shared%20Widget/custom_rate.dart';
 import '../../Home/view_model/home_cuibt.dart';
 import '../../Home/view_model/home_state.dart';
 import '../../const.dart';
-import '../../Home/view/movie_det.dart';
 
 class CustomSearchTab extends StatelessWidget {
   const CustomSearchTab({super.key});
@@ -57,7 +56,7 @@ class CustomSearchTab extends StatelessWidget {
       if (state is SearchMovieSuccessState) {
         return Column(
           children: [
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

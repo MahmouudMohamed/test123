@@ -6,7 +6,7 @@ import 'Home/view_model/home_cuibt.dart';
 import 'Home/view_model/home_state.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   static const String routeName = "home";
 
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                     onTap: (value) {
                       cubit.changeHomeScreen(value);
                     },
-                    items: [
+                    items: const [
                       BottomNavigationBarItem(
                         icon: Column(
                           children: [
