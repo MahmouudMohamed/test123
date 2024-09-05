@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:test123/Home/model/VideoModel.dart';
 import 'package:test123/const.dart';
 
 import '../../browse/model/GenresModel.dart';
@@ -29,6 +30,7 @@ class HomeCubit extends Cubit<HomeState> {
   SmillerMoviesModel? similarMoviesModel;
   SearchModel?searchModel;
   GenresModel?genresModel;
+  VideoModel?videoModel;
 
   static const String host = "api.themoviedb.org";
 
@@ -177,6 +179,33 @@ class HomeCubit extends Cubit<HomeState> {
       emit(SearchMovieErrorState());
     }
   }
+
+  getVideoMovie(movieId) async {
+    emit(VideoMovieLoadingState());
+    Uri url = Uri.https(
+      host,
+      "/3/movie/$movieId/videos",
+      {
+        'language': 'en',
+      },
+    );
+    try {
+      var response = await http.get(url, headers: Const.headers);
+      if (response.statusCode == 200) {
+        videoModel = VideoModel.fromJson(
+          jsonDecode(response.body),
+        );
+        emit(VideoMovieSuccessState());
+      } else {
+        emit(VideoMovieErrorState());
+      }
+    } catch (error) {
+      emit(VideoMovieErrorState());
+    }
+  }
+
+
+
 
   int index = 0;
 

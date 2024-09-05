@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
 import 'package:test123/browse/view/browse_details.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Shared Widget/row_category.dart';
 import 'similar_movies.dart';
@@ -23,7 +24,7 @@ class MovieDet extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeCubit()
         ..getMovieDetails(id)
-        ..getSimilarMovieDetails(id),
+        ..getSimilarMovieDetails(id)..getVideoMovie(id),
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
@@ -34,8 +35,7 @@ class MovieDet extends StatelessWidget {
               ),
             );
           }
-          if (state is MovieDetailsErrorState ||
-              state is SimilarMoviesErrorState) {
+          if (state is MovieDetailsErrorState || state is SimilarMoviesErrorState) {
             return Center(
               child: Column(
                 children: [
@@ -61,19 +61,56 @@ class MovieDet extends StatelessWidget {
                     // cubit.movieDetailsModel == null
                     //     ? const SizedBox.shrink()
                     //     :
-                    CachedNetworkImage(
-                      imageUrl: cubit.movieDetailsModel?.backdropPath == null
-                          ? Const.wrongImageBack
-                          : '$path${cubit.movieDetailsModel?.backdropPath ?? ""}',
-                      fit: BoxFit.fill,
-                      height: MediaQuery.sizeOf(context).height * 0.3,
-                      width: double.infinity,
-                      placeholder: (context, text) => const Center(
-                          child: CircularProgressIndicator(
-                        color: Colors.yellow,
-                      )),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                    Stack(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: cubit.movieDetailsModel?.backdropPath == null
+                              ? Const.wrongImageBack
+                              : '$path${cubit.movieDetailsModel?.backdropPath ?? ""}',
+                          fit: BoxFit.fill,
+                          height: MediaQuery.sizeOf(context).height * 0.3,
+                          width: double.infinity,
+                          placeholder: (context, text) => const Center(
+                              child: CircularProgressIndicator(
+                            color: Colors.yellow,
+                          )),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                        ),
+                        IconButton(onPressed: (){
+                          showDialog(context: context, builder: (context) =>
+                              AlertDialog(
+                            backgroundColor: Colors.grey.withOpacity(0.5),
+                            content:  SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.5,
+                              width: 150,
+                              child: ListView.separated(
+                                shrinkWrap:true,
+                                itemBuilder: (context, index) =>   TextButton(onPressed: ()
+                                {
+                                  Uri uri = Uri.parse(
+                                      'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key}??" "'
+                                  );
+                                  launchUrl(uri);
+                                  Navigator.pop(context);
+                                }
+                                  , child:  Text('Trailer${index+1}'??'',style: TextStyle(
+                                      fontSize: 25,color: Colors.red
+                                  ),
+                                  ),
+                                ),
+                                separatorBuilder: (context, index) => SizedBox(height: 10,),
+                                itemCount: cubit.videoModel?.results?.length??0,
+                              ),
+                            ),
+                          ));
+                          // Uri uri = Uri.parse(
+                          //     'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[0].key}??" "'
+                          // );
+                          // launchUrl(uri);
+
+                        }, icon: Text("Watch movie",style: TextStyle(color: Colors.white),))
+                      ],
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
                     Column(
@@ -145,8 +182,6 @@ class MovieDet extends StatelessWidget {
                                     itemBuilder: (context, index) =>
                                         InkWell(
                                           onTap: () {
-                                            debugPrint('movie det ${cubit.movieDetailsModel?.genres?[index].id.toString().runtimeType}');
-                                            debugPrint('movie det2 ${cubit.movieDetailsModel?.genres?[index].name.toString()}');
                                             Navigator.pushNamed(context, BrowseDetails.routeName,
                                             arguments: cubit.movieDetailsModel?.genres?[index],
                                             );
@@ -198,40 +233,7 @@ class MovieDet extends StatelessWidget {
                         // SimilarMovies(),
                       ],
                     ),
-                    // Text(
-                    //   cubit.movieDetailsModel?.overview ?? "",
-                    //   style: const TextStyle(
-                    //     color: Colors.white,
-                    //   ),
-                    // ),
-                    // Text(
-                    //   "${cubit.movieDetailsModel?.voteAverage}",
-                    //   style: const TextStyle(
-                    //     color: Colors.white,
-                    //   ),
-                    // ),
-                
-                    // Wrap(
-                    //   children: List.generate(
-                    //     cubit.movieDetailsModel?.genres?.length ?? 0,
-                    //     (index) => Text(
-                    //       "${cubit.movieDetailsModel?.genres?[index].name} | ",
-                    //       style: const TextStyle(
-                    //         color: Colors.white,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                
-                    // Wrap(
-                    //   children: List.generate(
-                    //     cubit.similarMoviesModel?.results?.length ?? 0,
-                    //         (index) => Text(
-                    //           '${cubit.similarMoviesModel?.results?[index].title} || ' ?? "",
-                    //           style: const TextStyle(color: Colors.white),
-                    //         ),
-                    //   ),
-                    // ),
+
                   ],
                 ),
               ),

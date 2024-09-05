@@ -58,6 +58,11 @@ class SearchMovieLoadingState extends HomeState {}
 class SearchMovieSuccessState extends HomeState {}
 
 class SearchMovieErrorState extends HomeState {}
+class VideoMovieLoadingState extends HomeState {}
+
+class VideoMovieSuccessState extends HomeState {}
+
+class VideoMovieErrorState extends HomeState {}
 class ChangeHomeState extends HomeState {}
 
 
