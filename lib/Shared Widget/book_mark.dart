@@ -4,20 +4,20 @@ class BookMark extends StatefulWidget {
   const BookMark({super.key});
 
   @override
-  State<BookMark> createState() => _BookMarkState();
+  State<BookMark> createState() => BookMarkState();
 }
-bool checkMark = false;
+bool _checkMark = false;
 
-class _BookMarkState extends State<BookMark> {
+class BookMarkState extends State<BookMark> {
   @override
   Widget build(BuildContext context) {
     return  InkWell(
         onTap: () {
           setState(() {
-            checkMark=!checkMark;
+            _checkMark=!_checkMark;
           });
         },
-        child: checkMark
+        child: _checkMark
             ? Image.asset("assets/images/bookmark.png")
             : Image.asset("assets/images/unbookmark.png"));
   }

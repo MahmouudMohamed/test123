@@ -63,60 +63,19 @@ class MovieDet extends StatelessWidget {
                     // cubit.movieDetailsModel == null
                     //     ? const SizedBox.shrink()
                     //     :
-                    Stack(
-                      children: [
-                        CachedNetworkImage(
-                          imageUrl: cubit.movieDetailsModel?.backdropPath == null
-                              ? Const.wrongImageBack
-                              : '$path${cubit.movieDetailsModel?.backdropPath ?? ""}',
-                          fit: BoxFit.fill,
-                          height: MediaQuery.sizeOf(context).height * 0.3,
-                          width: double.infinity,
-                          placeholder: (context, text) => const Center(
-                              child: CircularProgressIndicator(
-                            color: Colors.yellow,
-                          )),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
-                        ),
-                        IconButton(onPressed: (){
-                          showDialog(context: context, builder: (context) {
-                             return AlertDialog(
-                            backgroundColor: Colors.grey.withOpacity(0.5),
-                            content:  SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.3,
-                              width: 150,
-                              child: ListView.separated(
-                                shrinkWrap:true,
-                                itemBuilder: (context, index) =>   TextButton(onPressed: ()
-                                {
-                                  print('print ${cubit.videoModel?.results?[index].id}');
-                                  Uri uri = Uri.parse(
-                                      'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key}??" "'
-                                  );
-                                  launchUrl(uri);
-                                  Navigator.pop(context);
-                                }
-                                  , child:  Center(
-                                    child: Text(cubit.videoModel?.results?[index]==null?'No trailer':'Trailer${index+1}',
-                                      style: const TextStyle(
-                                        fontSize: 25,color: Colors.red
-                                    ),
-                                    ),
-                                  ),
-                                ),
-                                separatorBuilder: (context, index) => const SizedBox(height: 10,),
-                                itemCount: cubit.videoModel?.results?.length??0,
-                              ),
-                            ),
-                          );});
-                          // Uri uri = Uri.parse(
-                          //     'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[0].key}??" "'
-                          // );
-                          // launchUrl(uri);
-
-                        }, icon: const Text("Watch movie",style: TextStyle(color: Colors.white),))
-                      ],
+                    CachedNetworkImage(
+                      imageUrl: cubit.movieDetailsModel?.backdropPath == null
+                          ? Const.wrongImageBack
+                          : '$path${cubit.movieDetailsModel?.backdropPath ?? ""}',
+                      fit: BoxFit.fill,
+                      height: MediaQuery.sizeOf(context).height * 0.3,
+                      width: double.infinity,
+                      placeholder: (context, text) => const Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.yellow,
+                      )),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                     SizedBox(height: MediaQuery.sizeOf(context).height * 0.01),
                     Column(
@@ -147,19 +106,62 @@ class MovieDet extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 15.0),
-                              child: CachedNetworkImage(
-                                imageUrl: cubit.movieDetailsModel?.posterPath ==null
-                                    ? Const.wrongImagePoster
-                                    : '$path${cubit.movieDetailsModel?.posterPath}',
-                                height: MediaQuery.sizeOf(context).height * 0.3,
-                                placeholder: (context, text) => const Center(
-                                    child: CircularProgressIndicator(
-                                  color: Colors.yellow,
-                                )),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
+                              child: Column(
+                                children: [
+                                  CachedNetworkImage(
+                                    imageUrl: cubit.movieDetailsModel?.posterPath ==null
+                                        ? Const.wrongImagePoster
+                                        : '$path${cubit.movieDetailsModel?.posterPath}',
+                                    height: MediaQuery.sizeOf(context).height * 0.3,
+                                    placeholder: (context, text) => const Center(
+                                        child: CircularProgressIndicator(
+                                      color: Colors.yellow,
+                                    )),
+                                    errorWidget: (context, url, error) =>
+                                        const Icon(Icons.error),
+                                  ),
+                                  IconButton(onPressed: (){
+                                    showDialog(context: context, builder: (context) {
+                                      return AlertDialog(
+                                        backgroundColor: Colors.grey.withOpacity(0.5),
+                                        content:  SizedBox(
+                                          height: MediaQuery.sizeOf(context).height * 0.3,
+                                          width: 150,
+                                          child: ListView.separated(
+                                            shrinkWrap:true,
+                                            itemBuilder: (context, index) =>   TextButton(onPressed: ()
+                                            {
+                                              print('print ${cubit.videoModel?.results?[index].id}');
+                                              Uri uri = Uri.parse(
+                                                  'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key}??" "'
+                                              );
+                                              launchUrl(uri);
+                                              Navigator.pop(context);
+                                            }
+                                              , child:  Center(
+                                                child: Text(cubit.videoModel?.results?[index]==null?'No trailer':'Trailer${index+1}',
+                                                  style: const TextStyle(
+                                                      fontSize: 25,color: Colors.red
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            separatorBuilder: (context, index) => const SizedBox(height: 10,),
+                                            itemCount: cubit.videoModel?.results?.length??0,
+                                          ),
+                                        ),
+                                      );});
+                                    // Uri uri = Uri.parse(
+                                    //     'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[0].key}??" "'
+                                    // );
+                                    // launchUrl(uri);
+
+                                  }, icon: const Text("Watch movie",style: TextStyle(color: Colors.white),))
+
+                                ],
                               ),
                             ),
+
                             SizedBox(
                               width: MediaQuery.sizeOf(context).height * 0.01,
                             ),
@@ -167,12 +169,6 @@ class MovieDet extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Wrap(
-                                  //   children: cubit.movieDetailsModel?.genres?.map((genre) {
-                                  //     return CategoryChip(text: genre.name ?? '');
-                                  //   }).toList() ?? [],
-                                  // ),
-
                                   GridView.builder(
                                     shrinkWrap: true,
                                     physics: const NeverScrollableScrollPhysics(),
@@ -222,19 +218,20 @@ class MovieDet extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          color: const Color(0xff282A28),
-                          child: Column(
-                            children: [
-                              RowCategory(left: "More Like This"),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              const SimilarMovies()
-                            ],
-                          ),
-                        )
+                        SimilarMovies()
+                        // Container(
+                        //   padding: const EdgeInsets.all(20),
+                        //   color: const Color(0xff282A28),
+                        //   child: Column(
+                        //     children: [
+                        //       RowCategory(left: "More Like This"),
+                        //       const SizedBox(
+                        //         height: 15,
+                        //       ),
+                        //       const SimilarMovies()
+                        //     ],
+                        //   ),
+                        // )
 
                         // SimilarMovies(),
                       ],
