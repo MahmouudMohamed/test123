@@ -22,8 +22,7 @@ class CustomSearchTab extends StatelessWidget {
           ),
         );
       }
-      if (cubit.searchModel?.results?.isEmpty ??
-          true && state is! SearchMovieLoadingState){
+      if (cubit.searchModel?.results?.isEmpty ?? true && state is! SearchMovieLoadingState){
         return Column(
           children: [
             SizedBox(
@@ -70,7 +69,6 @@ class CustomSearchTab extends StatelessWidget {
                       Navigator.pushNamed(context, FilmDetails.routeName,
                           arguments: cubit.searchModel?.results?[index].id ?? 0);
                     },
-
                     child: Container(
                       alignment: Alignment.topLeft,
                       width: MediaQuery.of(context).size.width * 0.39,

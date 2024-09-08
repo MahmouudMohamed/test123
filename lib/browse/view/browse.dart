@@ -12,27 +12,6 @@ class Browse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List <String> images = [
-      'assets/images/action.jpg',
-      'assets/images/adventure.jpg',
-      'assets/images/anime.jpg',
-      'assets/images/comedy.jpg',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-      'assets/images/action.png',
-    ];
     return BlocProvider(
       create: (context) => CategoryCubit()..getGenreMovies(),
       child: BlocBuilder<CategoryCubit, CategoryState>(

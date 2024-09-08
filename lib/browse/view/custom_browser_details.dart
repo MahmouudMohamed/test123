@@ -67,7 +67,7 @@ class CustomBrowserDetails extends StatelessWidget {
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),
-                              BookMark()
+                              // BookMark()
                             ],
                           ),
                         ),
@@ -98,10 +98,7 @@ class CustomBrowserDetails extends StatelessWidget {
                       ],
                     ),
                   )
-                      // child: Text(
-                      //   view.categoryModel?.results?[index].title ?? '',
-                      //   style: const TextStyle(color: Colors.white, fontSize: 25),
-                      // ),
+
                       ),
                 ),
               ],

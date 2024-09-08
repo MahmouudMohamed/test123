@@ -26,28 +26,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-      HomeCubit()
-        ..getPopular()
-        .. getNewReleasesMovies()
-        ..getRecommendedMovies(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: HomeScreen.routeName,
-        themeMode: ThemeMode.light,
-        theme: MyThemeData.lightTheme,
-        routes: {
-          HomeScreen.routeName: (context) => const HomeScreen(),
-          Home.routeName: (context) => const Home(),
-          Search.routeName: (context) => const Search(),
-          Browse.routeName: (context) => const Browse(),
-          WatchList.routeName: (context) => const WatchList(),
-          MovieDet.routeName: (context) => const MovieDet(),
-          BrowseDetails.routeName: (context) => const BrowseDetails(),
-          FilmDetails.routeName: (context) => const FilmDetails(),
-        },
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: HomeScreen.routeName,
+      themeMode: ThemeMode.light,
+      theme: MyThemeData.lightTheme,
+      routes: {
+        HomeScreen.routeName: (context) => const HomeScreen(),
+        Home.routeName: (context) => const Home(),
+        Search.routeName: (context) => const Search(),
+        Browse.routeName: (context) => const Browse(),
+        WatchList.routeName: (context) => const WatchList(),
+        MovieDet.routeName: (context) => const MovieDet(),
+        BrowseDetails.routeName: (context) => const BrowseDetails(),
+        FilmDetails.routeName: (context) => const FilmDetails(),
+      },
+
     );
   }
 }

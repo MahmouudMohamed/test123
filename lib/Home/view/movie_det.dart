@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
 import 'package:test123/browse/view/browse_details.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../Shared Widget/row_category.dart';
 import 'similar_movies.dart';
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
@@ -133,7 +131,7 @@ class MovieDet extends StatelessWidget {
                                             {
                                               print('print ${cubit.videoModel?.results?[index].id}');
                                               Uri uri = Uri.parse(
-                                                  'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key}??" "'
+                                                  'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key??""}'
                                               );
                                               launchUrl(uri);
                                               Navigator.pop(context);

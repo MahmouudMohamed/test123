@@ -6,6 +6,7 @@ import 'package:test123/const.dart';
 import '../../Shared Widget/book_mark.dart';
 import '../../Shared Widget/custom_rate.dart';
 import '../../Shared Widget/row_category.dart';
+import '../../shimmer_card.dart';
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
 
@@ -22,10 +23,7 @@ class SimilarMovies extends StatelessWidget {
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
           if (state is SimilarMoviesLoadingState) {
-            return const Center(
-                child: CircularProgressIndicator(
-              color: Colors.yellow,
-            ));
+            return ShimmerCard();
           }
           if (state is SimilarMoviesErrorState) {
             return const Center(
@@ -97,7 +95,7 @@ class SimilarMovies extends StatelessWidget {
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
                                   ),
-                                  const BookMark()
+                                   BookMark()
                                 ],
                               ),
                             ),

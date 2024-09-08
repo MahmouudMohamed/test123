@@ -11,7 +11,8 @@ class CustomBrowse extends StatelessWidget {
   Widget build(BuildContext context) {
     var category = CategoryCubit.get(context);
     return SingleChildScrollView(
-      child: Column(
+      child:
+      Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(

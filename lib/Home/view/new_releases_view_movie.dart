@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
+import 'package:test123/shimmer_card.dart';
 
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
@@ -19,10 +20,7 @@ class NewReleasesViewMovie extends StatelessWidget {
         builder: (context, state) {
           var view=HomeCubit.get(context);
           if (state is NewReleaseLoadingState) {
-              return const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.yellow,
-                  ));
+              return ShimmerCard();
             }
             if (state is NewReleaseErrorState) {
               return Center(
@@ -63,7 +61,7 @@ class NewReleasesViewMovie extends StatelessWidget {
                             errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
 
-                              const BookMark()
+                               BookMark()
 
                             ],
                           ),

@@ -21,7 +21,7 @@ class CustomPopularMovie extends StatelessWidget {
         children: [
           CachedNetworkImage(
             imageUrl:
-                "https://image.tmdb.org/t/p/w500${popularIndex?.backdropPath ?? Const.wrongImageBack}",
+                "https://image.tmdb.org/t/p/w500${popularIndex!.backdropPath!}",
             fit: BoxFit.cover,
             placeholder: (context, text) => const CircularProgressIndicator(
               color: Colors.yellow,
@@ -55,7 +55,7 @@ class CustomPopularMovie extends StatelessWidget {
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                           ),
-                          const BookMark()
+                          BookMark()
                         ],
                       )),
                   SizedBox(
@@ -72,7 +72,7 @@ class CustomPopularMovie extends StatelessWidget {
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.5,
                             child: Text(
-                              popularIndex?.originalTitle ?? "",
+                              popularIndex!.originalTitle!,
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
@@ -81,10 +81,10 @@ class CustomPopularMovie extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            popularIndex?.releaseDate ?? "",
+                            popularIndex!.releaseDate !,
                             style: const TextStyle(color: Colors.white),
                           ),
-                         CustomRate(vote: "${popularIndex?.voteAverage ?? ""}".substring(0,3))
+                         CustomRate(vote: "${popularIndex!.voteAverage!}".substring(0,3))
                         ],
                       )
                     ],

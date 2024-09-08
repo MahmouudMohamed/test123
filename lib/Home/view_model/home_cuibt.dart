@@ -34,7 +34,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   static const String host = "api.themoviedb.org";
 
-  getPopular() async {
+  Future<void> getPopular() async {
     emit(PopularLoadingState());
     Uri url = Uri.https(
       host,
