@@ -17,15 +17,15 @@ class BookMark extends StatelessWidget {
       child: BlocBuilder<WatchListCubit, WatchListState>(
         builder: (context, state) {
           var watchList=WatchListCubit.get(context);
-          bool qw= watchList.watchListModel?.results?.any((e) => e.id==id? true : false) ?? false;
+          bool isAddedWatchList= watchList.watchListModel?.results?.any((e) => e.id==id? true : false) ?? false;
           return InkWell(
               onTap: () {
                 watchList.addToWatchList(
-                  isWatchList: qw ? false : true,
+                  isWatchList: isAddedWatchList ? false : true,
                   id: id,
                 );
               },
-              child: qw ?
+              child: isAddedWatchList ?
               Image.asset(
                   "assets/images/bookmark.png")
                   : Image.asset(
