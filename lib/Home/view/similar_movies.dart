@@ -95,7 +95,7 @@ class SimilarMovies extends StatelessWidget {
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
                                   ),
-                                   BookMark()
+                                   // BookMark()
                                 ],
                               ),
                             ),

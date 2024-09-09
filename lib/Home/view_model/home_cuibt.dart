@@ -9,7 +9,7 @@ import 'package:test123/const.dart';
 import '../../browse/model/GenresModel.dart';
 import '../../browse/view/browse.dart';
 import '../../search/search.dart';
-import '../../watch_list.dart';
+import '../../watch_list/watch_list.dart';
 import '../home_categories/home.dart';
 import '../model/MovieDetailsModel.dart';
 import '../model/NewReleaseModel.dart';

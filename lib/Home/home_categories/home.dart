@@ -4,6 +4,7 @@ import 'package:test123/Home/home_categories/popular_widget.dart';
 import 'package:test123/Home/home_categories/recommended_widget.dart';
 import 'package:test123/Home/view_model/home_cuibt.dart';
 import 'package:test123/Home/view_model/home_state.dart';
+import 'package:test123/watch_list/view_model/watch_list_cubit.dart';
 import 'new_releases_widget.dart';
 
 

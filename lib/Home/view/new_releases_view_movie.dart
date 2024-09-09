@@ -4,63 +4,71 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:redacted/redacted.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
-import 'package:test123/shimmer_card.dart';
+import 'package:test123/watch_list/view_model/watch_list_cubit.dart';
 
 import '../view_model/home_cuibt.dart';
 import '../view_model/home_state.dart';
 
 class NewReleasesViewMovie extends StatelessWidget {
   NewReleasesViewMovie({super.key});
-  bool checkMark = false;
-
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => HomeCubit()..getNewReleasesMovies(),
-      child: BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) {
-          var view=HomeCubit.get(context);
-          if (state is NewReleaseLoadingState) {
-            return  SizedBox(
-              height: MediaQuery.sizeOf(context).height * 0.26,
-              child: ListView.separated(
-                separatorBuilder: (context, index) => const SizedBox(width: 15,),
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          //id
-                          Navigator.pushNamed(context, FilmDetails.routeName,arguments :view.newReleaseModel?.results?[index].id);
-                        },
-                        child: Stack(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl: "https://image.tmdb.org/t/p/w500${view.newReleaseModel?.results?[index].posterPath??""}",
-                              fit: BoxFit.fill,
-                              height: MediaQuery.sizeOf(context).height * 0.25,
-                              width:140 ,
-                              placeholder: (context, text) =>
-                              const Center(child: CircularProgressIndicator(color: Colors.yellow,)),
-                              errorWidget: (context, url, error) => const Icon(Icons.error),
-                            ),
+    return BlocProvider(
+      create: (context) => HomeCubit()..getNewReleasesMovies(),
+      child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+            var view = HomeCubit.get(context);
+            if (state is NewReleaseLoadingState) {
+              return SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.26,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 15,
+                  ),
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            //id
+                            Navigator.pushNamed(context, FilmDetails.routeName,
+                                arguments: view.newReleaseModel?.results?[index].id);
+                          },
+                          child: Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl:
+                                    "https://image.tmdb.org/t/p/w500${view.newReleaseModel?.results?[index].posterPath ?? ""}",
+                                fit: BoxFit.fill,
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.25,
+                                width: 140,
+                                placeholder: (context, text) => const Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.yellow,
+                                )),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
 
-                            BookMark()
-
-                          ],
+                              // BookMark()
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                },
-                itemCount:view.newReleaseModel?.results?.length??0,
-              ),
-            ).redacted(context: context,
-              redact: true,
-              configuration: RedactedConfiguration(
-                animationDuration : const Duration(milliseconds: 800), //default
-              ),);
+                      ],
+                    );
+                  },
+                  itemCount: view.newReleaseModel?.results?.length ?? 0,
+                ),
+              ).redacted(
+                context: context,
+                redact: true,
+                configuration: RedactedConfiguration(
+                  animationDuration:
+                      const Duration(milliseconds: 800), //default
+                ),
+              );
             }
             if (state is NewReleaseErrorState) {
               return Center(
@@ -76,47 +84,64 @@ class NewReleasesViewMovie extends StatelessWidget {
             }
 
             if (state is NewReleaseSuccessState) {
-              return  SizedBox(
+              return SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.26,
                 child: ListView.separated(
-                  separatorBuilder: (context, index) => const SizedBox(width: 15,),
+                  separatorBuilder: (context, index) => const SizedBox(
+                    width: 15,
+                  ),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
+                    var release = view.newReleaseModel?.results?[index];
+                    // bool isWatchList = watchList.watchListModel?.results?.any(
+                    //       (e) => e.id == release?.id ? true : false,
+                    //     ) ??
+                    //     false;
+
                     return Column(
                       children: [
                         InkWell(
                           onTap: () {
                             //id
-                            Navigator.pushNamed(context, FilmDetails.routeName,arguments :view.newReleaseModel?.results?[index].id);
+                            Navigator.pushNamed(context, FilmDetails.routeName,
+                                arguments:
+                                    view.newReleaseModel?.results?[index].id);
                           },
                           child: Stack(
                             children: [
-                            CachedNetworkImage(
-                            imageUrl: "https://image.tmdb.org/t/p/w500${view.newReleaseModel?.results?[index].posterPath??""}",
-                            fit: BoxFit.fill,
-                            height: MediaQuery.sizeOf(context).height * 0.25,
-                            width:140 ,
-                            placeholder: (context, text) =>
-                                const Center(child: CircularProgressIndicator(color: Colors.yellow,)),
-                            errorWidget: (context, url, error) => const Icon(Icons.error),
-                          ),
+                              CachedNetworkImage(
+                                imageUrl:
+                                    "https://image.tmdb.org/t/p/w500${view.newReleaseModel?.results?[index].posterPath ?? ""}",
+                                fit: BoxFit.fill,
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.25,
+                                width: 140,
+                                placeholder: (context, text) => const Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.yellow,
+                                )),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                              ),
+                              BookMark(
+                                  id: view
+                                      .newReleaseModel!.results![index].id!,
 
-                               BookMark()
-
+                              ),
                             ],
                           ),
                         ),
                       ],
                     );
                   },
-                  itemCount:view.newReleaseModel?.results?.length??0,
+                  itemCount: view.newReleaseModel?.results?.length ?? 0,
                 ),
               );
             }
             return const SizedBox();
-          }),
-    );
+          })
 
+    );
 
 // Image.network("https://image.tmdb.org/t/p/w500${view.newReleaseModel!.results![index].posterPath!}",
 // CachedNetworkImage(
@@ -125,10 +150,6 @@ class NewReleasesViewMovie extends StatelessWidget {
 //                 CircularProgressIndicator(color: Colors.yellow,),
 //             errorWidget: (context, url, error) => Icon(Icons.error),
 //           ),
-
-
-
-
 
     //   SizedBox(
     //   height: MediaQuery.sizeOf(context).height * 0.25,

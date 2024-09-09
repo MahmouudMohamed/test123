@@ -1,26 +1,37 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:test123/watch_list/view_model/watch_list_cubit.dart';
 
-class BookMark extends StatefulWidget {
+class BookMark extends StatelessWidget {
   bool checkMark = false;
-   BookMark({  super.key});
+  // bool isWatchList = false;
+  int id;
 
-  @override
-  State<BookMark> createState() => BookMarkState();
-}
+  BookMark({super.key, required this.id});
 
 
-class BookMarkState extends State<BookMark> {
   @override
   Widget build(BuildContext context) {
-    return  InkWell(
-        onTap: () {
-          setState(() {
-            widget.checkMark=!widget.checkMark;
-          });
+    return BlocProvider(
+      create: (context) => WatchListCubit()..getWatchList(),
+      child: BlocBuilder<WatchListCubit, WatchListState>(
+        builder: (context, state) {
+          var watchList=WatchListCubit.get(context);
+          bool qw= watchList.watchListModel?.results?.any((e) => e.id==id? true : false) ?? false;
+          return InkWell(
+              onTap: () {
+                watchList.addToWatchList(
+                  isWatchList: qw ? false : true,
+                  id: id,
+                );
+              },
+              child: qw ?
+              Image.asset(
+                  "assets/images/bookmark.png")
+                  : Image.asset(
+                  "assets/images/unbookmark.png"));
         },
-        child: widget.checkMark
-            ? Image.asset("assets/images/bookmark.png")
-            : Image.asset("assets/images/unbookmark.png"));
+      ),
+    );
   }
 }

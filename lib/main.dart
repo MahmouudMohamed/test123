@@ -6,7 +6,7 @@ import 'package:test123/home_screen.dart';
 
 import 'package:test123/Home/view/movie_det.dart';
 import 'package:test123/search/search.dart';
-import 'package:test123/watch_list.dart';
+import 'package:test123/watch_list/watch_list.dart';
 
 import 'Home/home_categories/film_details.dart';
 import 'Home/home_categories/home.dart';
@@ -14,6 +14,7 @@ import 'Home/view_model/home_cuibt.dart';
 import 'bloc_observer.dart';
 import 'browse/view/browse.dart';
 import 'my_theme_data.dart';
+import 'watch_list/view_model/watch_list_cubit.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
