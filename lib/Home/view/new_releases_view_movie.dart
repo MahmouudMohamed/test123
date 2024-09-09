@@ -92,12 +92,6 @@ class NewReleasesViewMovie extends StatelessWidget {
                   ),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    var release = view.newReleaseModel?.results?[index];
-                    // bool isWatchList = watchList.watchListModel?.results?.any(
-                    //       (e) => e.id == release?.id ? true : false,
-                    //     ) ??
-                    //     false;
-
                     return Column(
                       children: [
                         InkWell(
@@ -124,7 +118,7 @@ class NewReleasesViewMovie extends StatelessWidget {
                                     const Icon(Icons.error),
                               ),
                               BookMark(
-                                  id: view
+                                  id:view
                                       .newReleaseModel!.results![index].id!,
 
                               ),

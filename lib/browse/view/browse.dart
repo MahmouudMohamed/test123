@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:redacted/redacted.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:test123/browse/view/browse_details.dart';
 import 'package:test123/browse/view/custom_browse.dart';
 import 'package:test123/browse/view_model/category_cubit.dart';
@@ -16,12 +18,43 @@ class Browse extends StatelessWidget {
       create: (context) => CategoryCubit()..getGenreMovies(),
       child: BlocBuilder<CategoryCubit, CategoryState>(
         builder: (context, state) {
-          var category = CategoryCubit.get(context);
           if(state is GenreMovieLoadingState){
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.yellow,
-              )
+            return Skeletonizer(
+              enabled:true,
+              child:  SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(''),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 2,
+                          mainAxisSpacing: 15,
+                          mainAxisExtent: 120),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Container(
+                              color: Colors.grey,
+                              width: 180,
+                              height: 110,
+                            ),
+                          ],
+                        );
+                      },
+                      itemCount: 15,
+                    ),
+                  ],
+                ),
+              ),
             );
           }
           if (state is GenreMovieErrorState) {

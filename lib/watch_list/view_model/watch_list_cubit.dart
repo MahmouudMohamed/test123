@@ -38,7 +38,7 @@ class WatchListCubit extends Cubit<WatchListState> {
       } else {
         emit(GetMoviesWatchListErrorState());
       }
-    } catch (error) {
+    } catch (e) {
       emit(GetMoviesWatchListErrorState());
       // print(error.toString());
     }

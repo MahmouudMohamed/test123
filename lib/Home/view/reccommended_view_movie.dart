@@ -18,21 +18,10 @@ class RecommendedViewMovie extends StatelessWidget {
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
-          if (state is RecommendedLoadingState) {
+          if (state is RecommendedLoadingState|| state is RecommendedErrorState) {
             return ShimmerCard();
           }
-          if (state is RecommendedErrorState) {
-            return Center(
-              child: Column(
-                children: [
-                  Text(
-                    "${state.errorMes}",
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            );
-          }
+
 
           if (state is RecommendedSuccessState) {
             return SizedBox(
