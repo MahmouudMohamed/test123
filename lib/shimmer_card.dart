@@ -11,7 +11,7 @@ class ShimmerCard extends StatelessWidget {
        child:  ListView.separated(
         separatorBuilder: (context, index) => const SizedBox(width: 15),
         scrollDirection: Axis.horizontal,
-        itemCount: 10, // The number of shimmer items
+        itemCount: 15, // The number of shimmer items
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
             baseColor: Colors.grey[600]!,

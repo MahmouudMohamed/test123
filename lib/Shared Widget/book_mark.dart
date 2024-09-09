@@ -8,8 +8,6 @@ class BookMark extends StatelessWidget {
   int id;
 
   BookMark({super.key, required this.id});
-
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
