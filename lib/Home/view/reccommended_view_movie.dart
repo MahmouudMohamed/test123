@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:redacted/redacted.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
@@ -70,7 +69,7 @@ class RecommendedViewMovie extends StatelessWidget {
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),
-                                // BookMark()
+                                BookMark(id: cubit.recommendedModel!.results![index].id!,)
                             ],
                           ),
                         ),
