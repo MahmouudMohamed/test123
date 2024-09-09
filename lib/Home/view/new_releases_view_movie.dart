@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:redacted/redacted.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
 import 'package:test123/shimmer_card.dart';
@@ -20,7 +21,46 @@ class NewReleasesViewMovie extends StatelessWidget {
         builder: (context, state) {
           var view=HomeCubit.get(context);
           if (state is NewReleaseLoadingState) {
-              return ShimmerCard();
+            return  SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.26,
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const SizedBox(width: 15,),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          //id
+                          Navigator.pushNamed(context, FilmDetails.routeName,arguments :view.newReleaseModel?.results?[index].id);
+                        },
+                        child: Stack(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: "https://image.tmdb.org/t/p/w500${view.newReleaseModel?.results?[index].posterPath??""}",
+                              fit: BoxFit.fill,
+                              height: MediaQuery.sizeOf(context).height * 0.25,
+                              width:140 ,
+                              placeholder: (context, text) =>
+                              const Center(child: CircularProgressIndicator(color: Colors.yellow,)),
+                              errorWidget: (context, url, error) => const Icon(Icons.error),
+                            ),
+
+                            BookMark()
+
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                itemCount:view.newReleaseModel?.results?.length??0,
+              ),
+            ).redacted(context: context,
+              redact: true,
+              configuration: RedactedConfiguration(
+                animationDuration : const Duration(milliseconds: 800), //default
+              ),);
             }
             if (state is NewReleaseErrorState) {
               return Center(

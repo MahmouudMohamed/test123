@@ -20,8 +20,7 @@ class RecommendedViewMovie extends StatelessWidget {
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
           if (state is RecommendedLoadingState) {
-            return Column(
-                children: [ShimmerCard()]);
+            return ShimmerCard();
           }
           if (state is RecommendedErrorState) {
             return Center(
