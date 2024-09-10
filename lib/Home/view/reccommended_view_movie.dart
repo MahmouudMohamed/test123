@@ -21,8 +21,6 @@ class RecommendedViewMovie extends StatelessWidget {
           if (state is RecommendedLoadingState|| state is RecommendedErrorState) {
             return ShimmerCard();
           }
-
-
           if (state is RecommendedSuccessState) {
             return SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.36,

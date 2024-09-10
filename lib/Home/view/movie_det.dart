@@ -58,9 +58,6 @@ class MovieDet extends StatelessWidget {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    // cubit.movieDetailsModel == null
-                    //     ? const SizedBox.shrink()
-                    //     :
                     CachedNetworkImage(
                       imageUrl: cubit.movieDetailsModel?.backdropPath == null
                           ? Const.wrongImageBack
@@ -118,6 +115,8 @@ class MovieDet extends StatelessWidget {
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
                                   ),
+
+
                                   IconButton(onPressed: (){
                                     showDialog(context: context, builder: (context) {
                                       return AlertDialog(
@@ -129,7 +128,6 @@ class MovieDet extends StatelessWidget {
                                             shrinkWrap:true,
                                             itemBuilder: (context, index) =>   TextButton(onPressed: ()
                                             {
-                                              print('print ${cubit.videoModel?.results?[index].id}');
                                               Uri uri = Uri.parse(
                                                   'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[index].key??""}'
                                               );
@@ -149,10 +147,7 @@ class MovieDet extends StatelessWidget {
                                           ),
                                         ),
                                       );});
-                                    // Uri uri = Uri.parse(
-                                    //     'https://www.youtube.com/watch?v=${cubit.videoModel?.results?[0].key}??" "'
-                                    // );
-                                    // launchUrl(uri);
+
 
                                   }, icon: const Text("Watch movie",style: TextStyle(color: Colors.white),))
 

@@ -15,20 +15,23 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              // PopularWidget(),
-              // NewReleasesWidget(),
-              Padding(
-                padding: EdgeInsets.only(bottom: 20.0),
-                child: RecommendedWidget(),
-              ),
+    return BlocProvider(
+      create: (context) => WatchListCubit()..getWatchList(),
+      child: Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                PopularWidget(),
+                NewReleasesWidget(),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 20.0),
+                  child: RecommendedWidget(),
+                ),
 
-            ],
-          ),
-        ));
+              ],
+            ),
+          )),
+    );
   }
 }
 
