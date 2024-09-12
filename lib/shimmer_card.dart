@@ -14,7 +14,7 @@ class ShimmerCard extends StatelessWidget {
         itemCount: 15, // The number of shimmer items
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
-            baseColor: Colors.red[600]!,
+            baseColor: Colors.grey[600]!,
             highlightColor: Colors.grey[200]!,
             child: Card(
               color: Colors.grey,
@@ -55,4 +55,18 @@ class ShimmerCard extends StatelessWidget {
     );
   }
 }
+///
+///SizedBox(
+//                 height: MediaQuery.of(context).size.height * 0.40,
+//                   child: Center(
+//                 child: CircularProgressIndicator(color: Colors.yellow).redacted(
+//                   context: context,
+//                   redact: true,
+//                   configuration: RedactedConfiguration(
+//                     animationDuration:
+//                     const Duration(milliseconds: 800), //default
+//                   ),
+//                 ),
+//               ),
+//               );
 

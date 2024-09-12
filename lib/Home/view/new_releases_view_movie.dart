@@ -21,52 +21,15 @@ class NewReleasesViewMovie extends StatelessWidget {
             if (state is NewReleaseLoadingState) {
               return SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.26,
-                child: ListView.separated(
-                  separatorBuilder: (context, index) => const SizedBox(
-                    width: 15,
+                child: Center(
+                  child: CircularProgressIndicator(color: Colors.yellow).redacted(
+                    context: context,
+                    redact: true,
+                    configuration: RedactedConfiguration(
+                      animationDuration:
+                          const Duration(milliseconds: 800), //default
+                    ),
                   ),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            //id
-                            Navigator.pushNamed(context, FilmDetails.routeName,
-                                arguments: view.newReleaseModel?.results?[index].id);
-                          },
-                          child: Stack(
-                            children: [
-                              CachedNetworkImage(
-                                imageUrl:
-                                    "https://image.tmdb.org/t/p/w500${view.newReleaseModel?.results?[index].posterPath ?? ""}",
-                                fit: BoxFit.fill,
-                                height:
-                                    MediaQuery.sizeOf(context).height * 0.25,
-                                width: 140,
-                                placeholder: (context, text) => const Center(
-                                    child: CircularProgressIndicator(
-                                  color: Colors.yellow,
-                                )),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-
-                              // BookMark()
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                  itemCount: view.newReleaseModel?.results?.length ?? 0,
-                ),
-              ).redacted(
-                context: context,
-                redact: true,
-                configuration: RedactedConfiguration(
-                  animationDuration:
-                      const Duration(milliseconds: 800), //default
                 ),
               );
             }

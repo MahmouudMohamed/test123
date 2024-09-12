@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
@@ -51,10 +52,15 @@ class RecommendedViewMovie extends StatelessWidget {
                                 fit: BoxFit.fill,
                                 height: MediaQuery.sizeOf(context).height * 0.26,
                                 width: MediaQuery.sizeOf(context).height * 0.19,
-                                placeholder: (context, text) => const Center(
-                                    child: CircularProgressIndicator(
-                                  color: Colors.yellow,
-                                )),
+                                placeholder: (context, text) => Shimmer.fromColors(
+                                  baseColor: Colors.grey[300]!,
+                                  highlightColor: Colors.grey[100]!,
+                                  child: Container(
+                                    height: MediaQuery.sizeOf(context).height * 0.26,
+                                    width: MediaQuery.sizeOf(context).height * 0.19,
+                                    color: Colors.grey[600]!,
+                                  ),
+                                ),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               ),
