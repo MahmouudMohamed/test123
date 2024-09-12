@@ -29,7 +29,6 @@ class PopularWidget extends StatelessWidget {
                           return Stack(
                             children: [
                               Container(
-
                                 color: Colors.grey[300],
                                 width: MediaQuery.of(context).size.width,
                                 height: MediaQuery.of(context).size.height * 0.3,
