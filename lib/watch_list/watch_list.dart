@@ -14,6 +14,13 @@ class WatchList extends StatelessWidget {
       child: BlocBuilder<WatchListCubit, WatchListState>(
         builder: (context, state) {
           var watchList = WatchListCubit.get(context);
+          if(state is GetMoviesWatchListLoadingState){
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.yellow,
+              ),
+            );
+          }
           return Scaffold(
             body: Column(
               children: [

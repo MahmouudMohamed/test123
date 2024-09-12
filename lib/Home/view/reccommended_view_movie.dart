@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:test123/Home/home_categories/film_details.dart';
 import 'package:test123/Shared%20Widget/book_mark.dart';
 import 'package:test123/Shared%20Widget/custom_rate.dart';
@@ -19,7 +20,8 @@ class RecommendedViewMovie extends StatelessWidget {
         builder: (context, state) {
           var cubit = HomeCubit.get(context);
           if (state is RecommendedLoadingState|| state is RecommendedErrorState) {
-            return ShimmerCard();
+            return Skeletonizer(
+                child: ShimmerCard());
           }
           if (state is RecommendedSuccessState) {
             return SizedBox(

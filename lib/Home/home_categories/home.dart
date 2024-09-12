@@ -21,8 +21,8 @@ class Home extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                PopularWidget(),
-                NewReleasesWidget(),
+                // PopularWidget(),
+                // NewReleasesWidget(),
                 Padding(
                   padding: EdgeInsets.only(bottom: 20.0),
                   child: RecommendedWidget(),

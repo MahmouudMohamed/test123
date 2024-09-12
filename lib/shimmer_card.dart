@@ -14,7 +14,7 @@ class ShimmerCard extends StatelessWidget {
         itemCount: 15, // The number of shimmer items
         itemBuilder: (context, index) {
           return Shimmer.fromColors(
-            baseColor: Colors.grey[600]!,
+            baseColor: Colors.red[600]!,
             highlightColor: Colors.grey[200]!,
             child: Card(
               color: Colors.grey,
